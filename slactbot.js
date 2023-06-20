@@ -12,31 +12,33 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Parse application/json
 app.use(bodyParser.json());
 
-// Slack verification endpoint
 app.post("/events", (req, res) => {
-  if (req.body.challenge) {
-    res.send(req.body.challenge);
-  }
+  
 });
 
 // Event subscription endpoint
 app.post("/events", async (req, res) => {
   const { event } = req.body;
 
-  if (event.type === "message" && event.channel_type === "im") {
-    // User sent a direct message (IM)
-
-    // Post the automated response
-    const message = {
-      token: TOKEN,
-      channel: event.channel,
-      text: "Direct messages are disabled, please communicate in your dedicated support channel.",
-    };
-
-    try {
-      await axios.post("https://slack.com/api/chat.postMessage", message);
-    } catch (error) {
-      console.error("Failed to post message:", error);
+  if (req.body.challenge) {
+    // Slack verification endpoint
+    res.send(req.body.challenge);
+  } else {
+    if (event.type === "message" && event.channel_type === "im") {
+      // User sent a direct message (IM)
+  
+      // Post the automated response
+      const message = {
+        token: TOKEN,
+        channel: event.channel,
+        text: "Direct messages are disabled, please communicate in your dedicated support channel.",
+      };
+  
+      try {
+        await axios.post("https://slack.com/api/chat.postMessage", message);
+      } catch (error) {
+        console.error("Failed to post message:", error);
+      }
     }
   }
 
