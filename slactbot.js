@@ -12,10 +12,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Parse application/json
 app.use(bodyParser.json());
 
-app.post("/events", (req, res) => {
-  
-});
-
 // Event subscription endpoint
 app.post("/events", async (req, res) => {
   const { event } = req.body;
