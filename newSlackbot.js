@@ -16,7 +16,7 @@ slackEvents.start(process.env.PORT).then(() => {
 });
 
 // Define a function to handle DM events
-slackEvents.on("message.im", async (event) => {
+slackEvents.on("message", async (event) => {
   console.log('Event: ', event)
   try {
     // Disable DMs by sending an error message back to the user
