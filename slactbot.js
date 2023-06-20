@@ -16,6 +16,8 @@ app.use(bodyParser.json());
 app.post("/events", async (req, res) => {
   const { event } = req.body;
 
+  console.log('event: ', req.body, event)
+
   if (req.body.challenge) {
     // Slack verification endpoint
     res.send(req.body.challenge);
