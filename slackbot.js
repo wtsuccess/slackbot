@@ -38,9 +38,8 @@ app.post("/events", async (req, res) => {
         console.error("Failed to post message:", error);
       }
     }
+    res.sendStatus(200);
   }
-
-  res.sendStatus(200);
 });
 
 // Start the server
