@@ -1,30 +1,20 @@
-const { WebClient, LogLevel } = require("@slack/web-api");
-const { createEventAdapter } = require("@slack/events-api");
-require('dotenv').config();
+const { App } = require('@slack/bolt');
+require('dotenv').config()
 
-// Initialize a new WebClient instance with bot token
-const slackBotClient = new WebClient(process.env.SLACK_BOT_TOKEN, {
-  logLevel: LogLevel.DEBUG
+const app = new App({
+  signingSecret: process.env.SLACK_SIGNING_SECRET,
+  token: process.env.SLACK_BOT_TOKEN,
 });
 
-// Initialize a new event adapter instance
-const slackEvents = createEventAdapter(process.env.SLACK_SIGNING_SECRET);
-
-// Start the server listening for incoming events
-slackEvents.start(process.env.PORT).then(() => {
-  console.log(`Server started on port ${process.env.PORT}`);
+/* Add functionality here */
+app.event('message', (args) => {
+  console.log('Event: Message: ', args);
 });
 
-// Define a function to handle DM events
-slackEvents.on("message", async (event) => {
-  console.log('Event: ', event)
-  try {
-    // Disable DMs by sending an error message back to the user
-    await slackBotClient.chat.postMessage({
-      channel: event.channel,
-      text: "Hey, it is not allowed to send DM in this workspace."
-    });
-  } catch (error) {
-    console.error(error);
-  }
-});
+
+(async () => {
+  // Start the app
+  await app.start(process.env.PORT || 3000);
+
+  console.log('⚡️ Bolt app is running!');
+})();
