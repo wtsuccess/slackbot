@@ -2,6 +2,7 @@ const express = require("express");
 const axios = require("axios");
 const bodyParser = require("body-parser");
 
+TOKEN = process.env.TOKEN;
 const app = express();
 const port = 3000; // Customize the port as needed
 
@@ -27,7 +28,7 @@ app.post("/events", async (req, res) => {
 
     // Post the automated response
     const message = {
-      token: "xoxb-4726784900181-5436141729799-XDbCse00F1skJVqnOo8RhLAb",
+      token: TOKEN,
       channel: event.channel,
       text: "Direct messages are disabled, please communicate in your dedicated support channel.",
     };
