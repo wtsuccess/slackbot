@@ -11,8 +11,16 @@ app.event('message', (args) => {
   console.log('Event: Message: ', args);
 });
 
-app.event('message.im', (args) => {
+app.event('im', (args) => {
   console.log('DM Event: ', args)
+})
+
+app.event('im_created', (args) => {
+  console.log('DM Event-Created: ', args)
+})
+
+app.event('im_updated__', (args) => {
+  console.log('DM Event-Updated: ', args)
 })
 
 // Reverse all messages the app can hear
