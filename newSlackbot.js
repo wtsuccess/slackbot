@@ -11,6 +11,10 @@ app.event('message', (args) => {
   console.log('Event: Message: ', args);
 });
 
+app.event('message.im', (args) => {
+  console.log('DM Event: ', args)
+})
+
 // Reverse all messages the app can hear
 app.message(async ({ message, say }) => {
   console.log("Message: ", message)
@@ -25,5 +29,5 @@ app.message(async ({ message, say }) => {
   // Start the app
   await app.start(process.env.PORT || 3000);
 
-  console.log('⚡️ Bolt app is running!');
+  console.log('⚡️ Bolt app is running! - ', process.env.PORT);
 })();
