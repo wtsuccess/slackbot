@@ -19,7 +19,7 @@ app.event('im_created', (args) => {
   console.log('DM Event-Created: ', args)
 })
 
-app.event('im_updated__', (args) => {
+app.event('im_updated', (args) => {
   console.log('DM Event-Updated: ', args)
 })
 
