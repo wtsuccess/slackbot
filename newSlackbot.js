@@ -7,6 +7,9 @@ const app = new App({
 });
 
 /* Add functionality here */
+app.event('message', (args) => {
+  console.log('Event: Message: ', args);
+});
 
 app.event('im_created', (args, user) => {
   console.log('DM Event-Created: ', args, user)
