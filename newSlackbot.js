@@ -13,6 +13,7 @@ app.event('message', (args) => {
 
 // Reverse all messages the app can hear
 app.message(async ({ message, say }) => {
+  console.log("Message: ", message)
   // Filter out message events with subtypes (see https://api.slack.com/events/message)
   if (message.subtype === undefined || message.subtype === 'bot_message') {
     const reversedText = [...message.text].reverse().join("");
